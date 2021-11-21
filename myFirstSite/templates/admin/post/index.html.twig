@@ -1,0 +1,52 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block body %}
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<h1 class="display-4 text-center mt-5">
+					{{ title }}
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			{% if check_category is not empty %}
+				<div class="col-12">
+					<a href="{{ path('admin_post_create')}}" class="btn btn-success mt-5">
+						Создать пост
+					</a>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				{% if check_category is empty %}
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						<p>Создание постов невозможно, сначала создай категорию.</p><hr>
+						<a href="{{ path('admin_category_create')}}">
+						Создать категорию </a>
+					</div>
+					{% else %}
+					<h2>
+						Список постов
+					</h2>
+					<ul>
+						{% for postItem in post %}
+							<li>
+								{{ postItem.title }}</li>
+						{% endfor %}
+					</ul>
+				{% endif %}
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

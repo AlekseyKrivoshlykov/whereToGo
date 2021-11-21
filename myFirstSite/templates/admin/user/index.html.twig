@@ -2,17 +2,45 @@
 
 {% block body %}
 
-<h1> {{ title }}</h1>
-<a href="{{  path('admin_user_create') }}"> Создать пользователя</a><br>
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<h1 class="display-4 text-center mt-5">
+					{{ title }}
+				</h1>
+			</div>
+		</div>
+	</div>
 
-<h2> Список пользователей </h2>
-<ul> 
-{% for user in users %}
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<a href="{{ path('admin_user_create')}}" class="btn btn-success mt-5">
+					Создать пользователя
+				</a>
+			</div>
+		</div>
+	</div>
 
-<li> {{ user.getEmail }}, {{ user.getRoles | json_encode() }}</li>
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<h2>
+					Список пользователей
+				</h2>
+				<ul>
+					{% for user in users %}
+
+						<li>
+							{{ user.getEmail }},
+							{{ user.getRoles | json_encode() }}</li>
 
 
-{% endfor %}
-</ul>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
 
 {% endblock %}
