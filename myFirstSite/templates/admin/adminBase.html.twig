@@ -2,18 +2,65 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Admin Page{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
-            {#{{ encore_entry_link_tags('app') }}#}
+            {# Почему это способ подключения фонтавсом не работает? #}
+			{# <link rel="stylesheet" href="{{ asset('assets/library/fontawesome-5.15.4/css/fontawesome.min.css')}}"> #}
+            <link rel="stylesheet" href="{{ asset('assets/library/bootstrap-5.1.3/css/bootstrap.min.css')}}"> 
+            <link rel="stylesheet" href="{{ asset('assets/main/css/style.css')}}">
+            <script src="https://kit.fontawesome.com/6d880d91ac.js" crossorigin="anonymous"></script>
         {% endblock %}
 
         {% block javascripts %}
-            {#{{ encore_entry_script_tags('app') }}#}
+            <script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"> </script>
+			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+            <script src="{{ asset('assets/library/bootstrap-5.1.3/js/bootstrap.min.js')}}"></script>
         {% endblock %}
     </head>
     <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<div class="container-fluid">
+				<a class="navbar-brand" href="{{ path('home')}}">
+                    Админка
+					<i class="fas fa-wine-bottle"></i>
+				</a>
+				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+					<span class="navbar-toggler-icon"></span>
+				</button>
+				<div class="collapse navbar-collapse" id="navbarSupportedContent">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{ path('admin_home')}}">Главная страница</a>
+						</li>
+                         <li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{ path('admin_user')}}">Пользователи</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{ path('admin_category') }}">Категории</a>
+						</li>
+						 <li class="nav-item">
+							<a class="nav-link active" aria-current="page" href="{{ path('admin_post')}}">Посты</a>
+						</li>
+                        <li class="nav-item">
+							<a class="nav-link active" target="_blank" aria-current="page" href="{{ path('home')}}">Выход на сайт</a>
+						</li>
+						
+						
+					</ul>
+                                                    {# Поиск по сайту #}
+					{# <form class="d-flex">
+						<input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
+						<button class="btn btn-outline-success" type="submit">Поиск</button>
+					</form> #}
+
+					<form class="d-flex">
+                            <a href="{{ path('app_logout') }}" class="btn btn-outline-info" type="submit">Выход</a> 		
+					</form>
+				</div>
+			</div>
+		</nav>
         {% block body %}{% endblock %}
     </body>
 </html>

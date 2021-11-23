@@ -1,0 +1,59 @@
+{% extends 'admin/adminBase.html.twig' %}
+
+{% block body %}
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<h1 class="display-4 text-center mt-5">
+					{{ title }}
+				</h1>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<a href="{{ path('admin_category_create')}}" class="btn btn-success mt-5">
+					Создать категорию
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row no-gutters justify-content-center">
+			<div class="col-8">
+				{% for message in app.getFlashes('success') %}
+					<div class="alert alert-success alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid">
+		<div class="row no-gutters">
+			<div class="col-12">
+				<h2>
+					Список категорий
+				</h2>
+				<ul>
+					{% for categoryItem in category %}
+						<li>
+							{{ categoryItem.title }}
+							<a href="{{ path('admin_category_update', {'id': categoryItem.id }) }}" class="btn-link">
+								Редактировать
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+	</div>
+
+
+{% endblock %}

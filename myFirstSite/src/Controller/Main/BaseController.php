@@ -8,7 +8,7 @@ class BaseController extends AbstractController {
 
     public function renderDefault () {
         return [
-            'title' => 'Сайт камРелакс'
+            'title' => 'Kam_Places'
         ];
     }
 }
