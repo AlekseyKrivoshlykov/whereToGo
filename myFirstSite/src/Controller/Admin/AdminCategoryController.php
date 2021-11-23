@@ -60,12 +60,22 @@ class AdminCategoryController extends AdminBaseController
         $form = $this->createForm(CategoryType::class, $category);
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()) {
-            // if($form->get('save')->isClicked()){    МЕТОД UNDEFINED ПОЧЕМУ-ТО!
+            // Следующий коммент сообщает среде о том, что get() вернет кликабельный объект, а не интерфэйс
+             /** @var ClickableInterface $button  */
+             $button = $form->get('save');
+             if($button->isClicked()) {
                 $category->setUpdateAtValue();
-                $em->flush();
                 $this->addFlash('success', 'Категория обновлена');
-            // }
-           
+             }
+           // Следующий коммент сообщает среде о том, что get() вернет кликабельный объект, а не интерфэйс
+             /** @var ClickableInterface $button  */
+             $button = $form->get('delete');
+             if($button->isClicked()) {
+                $em->remove($category);
+                $this->addFlash('success', 'Категория удалена');
+             }
+
+            $em->flush();
             return $this->redirectToRoute('admin_category');
         }
     
@@ -75,5 +85,4 @@ class AdminCategoryController extends AdminBaseController
         return $this->render('admin/category/form.html.twig', $forRender);
     }
 
-    
 }

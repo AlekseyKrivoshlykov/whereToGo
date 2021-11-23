@@ -12,6 +12,19 @@
 		</div>
 	</div>
 
+	<div class="container">
+        <div class="row no-gutters justify-content-center mt-3">
+            <div class="col-8">
+                {% for message in app.flashes('success') %}
+                   <div class="alert alert-success alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
 	<div class="container-fluid">
 		<div class="row no-gutters">
 			{% if check_category is not empty %}
@@ -31,16 +44,22 @@
 					<div class="alert alert-success alert-dismissible fade show" role="alert">
 						<p>Создание постов невозможно, сначала создай категорию.</p><hr>
 						<a href="{{ path('admin_category_create')}}">
-						Создать категорию </a>
+							Создать категорию
+						</a>
 					</div>
-					{% else %}
+				{% else %}
 					<h2>
 						Список постов
 					</h2>
 					<ul>
 						{% for postItem in post %}
 							<li>
-								{{ postItem.title }}</li>
+								<img src="{{ asset('uploads/post/')}}{{ postItem.getImage }}" alt="whr" width="100">
+								{{ postItem.title }}
+								<a href="{{ path('admin_post_update', { 'id': postItem.getId }) }}" class="btn-link">
+									Редактровать
+								</a>
+							</li>
 						{% endfor %}
 					</ul>
 				{% endif %}
