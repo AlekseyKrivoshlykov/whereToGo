@@ -4,4 +4,34 @@
     border-radius: 5px;
     margin: 30% auto;
 }
+.search_form {
+    margin-right: 25px;
+}
+.nav_btn {
+    margin-right: 15px;
+} 
+.place_link {
+    display: block;
+    height: 20rem;
+    opacity: 0.9;
+    text-decoration: none;
+}
+.place_link:hover {
+    opacity: 1;
+    transition: all 0.4s ease-out;
+}
+main { 
+    min-height: calc(100vh - 80px);
+}
+footer {
+    height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #d9d4d4;
+}
+.carousel-item {
+    height: 40%;
+    width: 40%;
+}
 

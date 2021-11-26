@@ -3,10 +3,11 @@
 namespace App\Controller\Main;
 
 use App\Entity\Place;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class PlaceController extends BaseController
+class VolcanoController extends BaseController
 {
     #[Route('/volcanoes', name: 'volcanoes')]
     public function indexVolcanoes (): Response
@@ -16,19 +17,21 @@ class PlaceController extends BaseController
         $forRender['volcanoes'] = $this->getDoctrine()->getRepository(Place::class)
                                         ->findBy(['category_place' => '1']);
         
-        
         return $this->render('main/place/volcanoes/index.html.twig', $forRender);
     }
 
-    #[Route('/hot_springs', name: 'hot_springs')]
-    public function indexHotSprings (): Response
+    #[Route('/volcanoes/{id}', name: 'volcanoes_id')]
+    public function showOneVolcano (int $id): Response
     {
+        $place = $this->getDoctrine()->getRepository(Place::class)
+                                    ->find($id);
+        if (!$place) {
+            throw $this->createNotFoundException('Место с'. $id . 'не найдено.');
+        }
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Вулканы Камчатки';
-        $forRender['hotSprings'] = $this->getDoctrine()->getRepository(Place::class)
-                                        ->findBy(['category_place' => '2']);
-        
-        
-        return $this->render('main/place/hotSprings/index.html.twig', $forRender);
+        $forRender['place'] = $place;
+    
+        return $this->render('main/place/volcanoes/oneVolcano.html.twig', $forRender);
     }
+   
 }
