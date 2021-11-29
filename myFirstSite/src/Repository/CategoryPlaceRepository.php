@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\CategoryPlace;
+use App\Repository\CategoryPlaceRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -12,39 +13,26 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method CategoryPlace[]    findAll()
  * @method CategoryPlace[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class CategoryPlaceRepository extends ServiceEntityRepository
+class CategoryPlaceRepository extends ServiceEntityRepository implements CategoryPlaceRepositoryInterface
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, CategoryPlace::class);
     }
+ 
 
-    // /**
-    //  * @return CategoryPlace[] Returns an array of CategoryPlace objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findCategory ($id)
     {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('c.id', 'ASC')
-            ->setMaxResults(10)
+        $result = $this->createQueryBuilder('category_place')
+            ->select('category_place.en_title')
+            // ->join('place', 'p')
+            ->where('category_place.id = :id') 
+            ->setParameter('id', $id)
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
+            
+        return $result;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?CategoryPlace
-    {
-        return $this->createQueryBuilder('c')
-            ->andWhere('c.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
-    }
-    */
 }
+

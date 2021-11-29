@@ -30,12 +30,12 @@
 				</h2>
 				<ul>
 					{% for user in users %}
-
 						<li>
 							{{ user.getEmail }},
-							{{ user.getRoles | json_encode() }}</li>
-
-
+							{{ user.getRoles | json_encode() }}
+							<a href="{{ path('admin_user_update', {'userId': user.getId }) }}" class="btn btn-primary">Редактировать пользователя</a>
+							
+						</li>
 					{% endfor %}
 				</ul>
 			</div>

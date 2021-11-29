@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use App\Form\UserType;
+use App\Repository\UserRepository;
 use App\Repository\UserRepositoryInterface;
 use App\Services\User\UserService;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -57,6 +58,26 @@ class AdminUserController extends AdminBaseController
         $forRender['title'] = 'Форма создания пользователя на сайте';
         $forRender['form'] = $form->createView();
         return $this->render('admin/user/form.html.twig', $forRender);
+
+    }
+
+
+    #[Route('/admin/user/update/{userId}', name: 'admin_user_update')]
+    public function updateAction (Request $request, int $userId) 
+    {
+      $user = $this->userRepository->getOne($userId);
+      $formUser = $this->createForm(UserType:: class, $user);
+      $formUser->handleRequest($request);
+      if($formUser->isSubmitted() && $formUser->isValid())
+      {
+          $this->userService->handleUpdate($user);
+          $this->addFlash('success', 'Изменения сохранены');
+          return $this->redirectToRoute('admin_user');
+      }
+      $forRender = parent::renderDefault();
+      $forRender['title'] = 'Редактирование пользователя';
+      $forRender['form'] = $formUser->createView();
+      return $this->render('admin/user/form.html.twig', $forRender);
 
     }
 }
