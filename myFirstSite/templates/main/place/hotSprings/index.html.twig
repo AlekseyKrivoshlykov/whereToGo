@@ -1,12 +1,12 @@
 {% extends 'main/base.html.twig' %}
 
-
+{% block title %}Горячие источники{% endblock %}
 {% block body %}
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
 			<div class="col-12 col-lg-6 col-md-6">
 				<h1 class="display-4 text-center">
-					Горячие источники
+					{{ title }}
 				</h1>
 			</div>
 		</div>
@@ -17,9 +17,9 @@
 			{% for spring in hotSprings %}
 				{# <li class="list-group-item"> #}
 				<div class="col">
-					<div class="card border-dark mb-3" style="width: 18rem; height: 20rem;">
-						<a href="#" class="link">
-							<img src="{{ asset('assets/main/images/HotSprings/')}}{{ spring.getMainPhoto }}" class="card-img-top" alt="hspring" width="100%" height="200">
+					<div class="card border-dark mb-3" style="width: 18rem;">
+						<a href="{{ path('hot_springs_id', {'id': spring.getId }) }}" class="link place_link">
+							<img src="{{ asset('assets/main/images/HotSprings/')}}{{ spring.getMainPhoto }}" class="card-img-top" alt="hotspring" width="100%" height="200">
 							<div class="card-body text-dark">
 								<h5 class="card-title">{{ spring.title}}</h5>
 							</div>
