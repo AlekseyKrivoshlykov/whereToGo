@@ -10,4 +10,13 @@
 			</div>
 		</div>
 	</div>
+	{% for place in places %}
+	{% for category in nameCategory %}
+		<div class="media text-muted pt-3">
+			<p class="media-body pb-3 mb-0 small lh-125 border-bottom border-gray">
+				<a href="{{ path('' ~ category.en_title ~ '_id', { 'id': place.id }) }}">{{ place.title }}</a>
+			</p>
+		</div>
+	{% endfor %}
+	{% endfor %}
 {% endblock %}

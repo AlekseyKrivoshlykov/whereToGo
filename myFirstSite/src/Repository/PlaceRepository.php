@@ -3,7 +3,10 @@
 namespace App\Repository;
 
 use App\Entity\Place;
+use App\Entity\CategoryPlace;
+use App\Repository\PlaceRepositoryInterface;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -12,39 +15,28 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Place[]    findAll()
  * @method Place[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class PlaceRepository extends ServiceEntityRepository
+class PlaceRepository extends ServiceEntityRepository implements PlaceRepositoryInterface
 {
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Place::class);
+
     }
 
-    // /**
-    //  * @return Place[] Returns an array of Place objects
-    //  */
-    /*
-    public function findByExampleField($value)
+        public function findQuery (string $value): array
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        $result = $this->createQueryBuilder('place')
+            ->select('place.title', 'place.id', '(place.category_place)')
+            ->where('place.title LIKE :value') 
+            ->setParameter('value', '%'. $value . '%')
             ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+            ->getArrayResult();
 
-    /*
-    public function findOneBySomeField($value): ?Place
-    {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        return $result;
     }
-    */
 }
+
+
+
+

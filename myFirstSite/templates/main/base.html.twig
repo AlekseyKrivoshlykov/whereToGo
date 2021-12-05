@@ -6,7 +6,7 @@
 			{% block title %}{% endblock %}
 		</title>
 		{# Run `composer require symfony/webpack-encore-bundle`
-								           and uncomment the following Encore helpers to start using Symfony UX #}
+																						           and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('assets/library/fontawesome-5.15.4/css/all.min.css')}}">
 			<link rel="stylesheet" href="{{ asset('assets/library/bootstrap-5.1.3/css/bootstrap.min.css')}}">
@@ -17,8 +17,7 @@
 
 		{% block javascripts %}
 			<!-- Optional JavaScript -->
-			<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-			<script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"> </script>
+			<!-- jQuery first, then Popper.js, then Bootstrap JS --><script src="https://code.jquery.com/jquery-3.4.1.min.js" crossorigin="anonymous"> </script>
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 			<script src="{{ asset('assets/library/bootstrap-5.1.3/js/bootstrap.min.js')}}"></script>
 
@@ -59,32 +58,31 @@
 						</li>
 
 						{# ВЫПАДАЮЩЕЕ МЕНЮ ЕСЛИ НУЖНО ! #}
-					{# <li class="nav-item dropdown">
-																			<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-																				Dropdown
-																			</a>
-																			<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-																				<li>
-																					<a class="dropdown-item" href="#">Action</a>
-																				</li>
-																				<li>
-																					<a class="dropdown-item" href="#">Another action</a>
-																				</li>
-																				<li><hr class="dropdown-divider"></li>
-																				<li>
-																					<a class="dropdown-item" href="#">Something else here</a>
-																				</li>
-																			</ul>
-																		</li> #}
-
-						{# <li class="nav-item">
-																					<a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-																				</li> #}
+						{# <li class="nav-item dropdown">
+																	<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+																	Dropdown
+																	</a>
+																	<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+																	<li>
+																	<a class="dropdown-item" href="#">Action</a>
+																	</li>
+																	<li>
+																	<a class="dropdown-item" href="#">Another action</a>
+																	</li>
+																	<li><hr class="dropdown-divider"></li>
+																	<li>
+																	<a class="dropdown-item" href="#">Something else here</a>
+																	</li>
+																	</ul>
+																	</li> #}
 					</ul>
-					<form class="d-flex search_form">
-						<input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search">
-						<button class="btn btn-outline-light" type="submit">Поиск</button>
+
+					<div class="navbar-form-wrapper d-flex">
+					<form class="d-flex search_form" action="{{ path('search') }}" method='GET'>
+						<input class="form-control me-2" type="search" placeholder="Поиск" aria-label="Search" name="q">
+						<button class="btn btn-outline-light btn-search" type="submit">Поиск</button>
 					</form>
+
 					<form class="d-flex">
 						{% if is_granted('IS_AUTHENTICATED_FULLY')%}
 							{% if is_granted('ROLE_ADMIN') %}
@@ -92,27 +90,27 @@
 							{% endif %}
 							<a href="{{ path('app_logout') }}" class="btn btn-outline-light" type="submit">Выход</a>
 						{% else %}
-							<a href="{{ path('app_login') }}" class="btn btn-outline-light nav_btn" type="submit">Войти</a>
+							<a href="{{ path('app_login') }}" class="btn btn-outline-light nav_btn_entry" type="submit">Войти</a>
 							<a href="{{ path('app_register') }}" class="btn btn-outline-light" type="submit">Регистрация</a>
 						{% endif %}
-
 					</form>
+				</div>
+
 
 				</div>
+
+				
+
 			</div>
 		</nav>
-		<main>
-		{% block body %}{% endblock %}
-		
-		
-		</main>
+		<main class="container"> {% block body %}{% endblock %}
 
 
-		<footer>
-			&copy; KamPlaces
-		</footer>
-		
-		
-	</body>
+			</main>
 
-</html>
+
+			<footer>
+				&copy; KamPlaces
+			</footer>
+		</body>
+	</html>

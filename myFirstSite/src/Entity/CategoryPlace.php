@@ -29,6 +29,11 @@ class CategoryPlace
      */
     private $place;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $en_title;
+
     public function __construct()
     {
         $this->place = new ArrayCollection();
@@ -77,6 +82,18 @@ class CategoryPlace
                 $place->setCategoryPlace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEnTitle(): ?string
+    {
+        return $this->en_title;
+    }
+
+    public function setEnTitle(?string $en_title): self
+    {
+        $this->en_title = $en_title;
 
         return $this;
     }
