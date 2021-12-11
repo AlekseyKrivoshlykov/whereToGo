@@ -54,10 +54,16 @@ class Place
      */
     private $category_place;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="place", orphanRemoval=true)
+     */
+    private $comments;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
         $this->placeCategories = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -163,6 +169,36 @@ class Place
     public function setCategoryPlace(?CategoryPlace $category_place): self
     {
         $this->category_place = $category_place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getComments(): Collection
+    {
+        return $this->comments;
+    }
+
+    public function addComment(Comment $comment): self
+    {
+        if (!$this->comments->contains($comment)) {
+            $this->comments[] = $comment;
+            $comment->setPlace($this);
+        }
+
+        return $this;
+    }
+
+    public function removeComment(Comment $comment): self
+    {
+        if ($this->comments->removeElement($comment)) {
+            // set the owning side to null (unless already changed)
+            if ($comment->getPlace() === $this) {
+                $comment->setPlace(null);
+            }
+        }
 
         return $this;
     }

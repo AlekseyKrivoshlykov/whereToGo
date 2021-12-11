@@ -2,13 +2,13 @@
 
 
 {% block body %}
+	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5">{{ place.title }}</h1>
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
 			<div class="col-12 col-lg-6 col-md-6">
 				<ul>
 					<li>
 						<img src="{{ asset('assets/main/images/Volcanoes/')}}{{ place.getMainPhoto }}" alt="volcano" width="100">
-						{{ place.title }} <br>
 						{{ place. description }}
 					</li>
 				</ul>

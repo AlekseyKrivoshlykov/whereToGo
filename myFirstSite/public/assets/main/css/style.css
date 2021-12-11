@@ -2,7 +2,7 @@
     width: 80%;
     padding: 30px;
     border-radius: 5px;
-    margin: 30% auto;
+    margin: 20% auto;
 }
 .search_form {
     margin-right: 25px;
@@ -38,6 +38,31 @@ footer {
 }
 .nav-link:hover {
     box-shadow: 0 0 0 0.15rem rgb(248 249 250 / 50%);
+}
+.form-group {
+    margin-bottom: 0.5rem;
+}
+#map {
+    width: 960px;
+    height: 400px !important;
+    max-width: 100%;
+    max-height: 100%;
+}
+.comment-wrapper {
+    display: flex;
+}
+/* .commentaries {
+    min-width: 60%;
+} */
+.comment-form {
+    max-width: 40%;
+}
+.comment-pagination {
+    display: flex;
+    justify-content: center;
+}
+.pagination-left-arrow {
+    margin-right: 3rem;
 }
 
 

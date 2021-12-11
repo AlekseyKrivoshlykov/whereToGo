@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use App\Repository\CommentRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -26,20 +27,60 @@ class Comment
     private $content;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Post::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $post;
-
-    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $create_at;
+
+     /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $update_at;
 
     /**
      * @ORM\Column(type="boolean")
      */
     private $is_published;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Place::class, inversedBy="comments")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $place;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class, inversedBy="comment_user")
+     */
+    private $user;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $user_name;
+
+    public function __construct()
+    {
+        $this->create_at = new DateTimeImmutable();
+        $this->update_at = new DateTimeImmutable();
+    }
+
+     /**
+     * @param string $content
+     * @param User $user
+     * @param Place $place
+     *
+     * @return Comment
+     */
+    public static function createComment (string $content, User $user, Place $place, $is_published): Comment
+    {
+        $content = new self();
+        $content->content = $content;
+        $content->place = $place;
+        $content->user = $user;
+        $content->is_published = $is_published;
+        
+        return $content;
+    }
+
 
     public function getId(): ?int
     {
@@ -58,18 +99,6 @@ class Comment
         return $this;
     }
 
-    public function getPost(): ?Post
-    {
-        return $this->post;
-    }
-
-    public function setPost(?Post $post): self
-    {
-        $this->post = $post;
-
-        return $this;
-    }
-
     public function getCreateAt(): ?\DateTimeImmutable
     {
         return $this->create_at;
@@ -77,7 +106,7 @@ class Comment
     
     public function setCreateAtValue () 
     {
-        $this->create_at = new \DateTime();
+        $this->create_at = new DateTimeImmutable();
     }
 
     public function setCreateAt(\DateTimeImmutable $create_at): self
@@ -101,5 +130,53 @@ class Comment
     public function setIsDraft ()
     {
         $this->is_published = self::DRAFT;
+    }
+
+    public function getPlace(): ?Place
+    {
+        return $this->place;
+    }
+
+    public function setPlace(?Place $place): self
+    {
+        $this->place = $place;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
+
+        return $this;
+    }
+
+    public function getUpdateAt(): ?\DateTimeImmutable
+    {
+        return $this->update_at;
+    }
+
+    public function setUpdateAt(?\DateTimeImmutable $update_at): self
+    {
+        $this->update_at = $update_at;
+
+        return $this;
+    }
+
+    public function getUserName(): ?string
+    {
+        return $this->user_name;
+    }
+
+    public function setUserName(string $user_name): self
+    {
+        $this->user_name = $user_name;
+
+        return $this;
     }
 }

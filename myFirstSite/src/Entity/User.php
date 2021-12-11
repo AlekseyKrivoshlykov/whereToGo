@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -10,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
+ * @UniqueEntity(fields={"email"}, message="Аккаунт с таким email уже зарегистрирован.")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -42,6 +44,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="user")
+     */
+    private $comment_user;
+
+    public function __construct()
+    {
+        $this->comment_user = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -151,6 +163,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsVerified(bool $isVerified): self
     {
         $this->isVerified = $isVerified;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Comment[]
+     */
+    public function getCommentUser(): Collection
+    {
+        return $this->comment_user;
+    }
+
+    public function addCommentUser(Comment $commentUser): self
+    {
+        if (!$this->comment_user->contains($commentUser)) {
+            $this->comment_user[] = $commentUser;
+            $commentUser->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCommentUser(Comment $commentUser): self
+    {
+        if ($this->comment_user->removeElement($commentUser)) {
+            // set the owning side to null (unless already changed)
+            if ($commentUser->getUser() === $this) {
+                $commentUser->setUser(null);
+            }
+        }
 
         return $this;
     }

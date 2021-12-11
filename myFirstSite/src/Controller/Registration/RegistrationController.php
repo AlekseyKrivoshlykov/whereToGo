@@ -50,25 +50,32 @@ class RegistrationController extends AbstractController
                 (new TemplatedEmail())
                     ->from(new Address('zawertuy@gmail.com', 'Подтверждение регистрации'))
                     ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
+                    ->subject('Подтверждение регистрации на сайте KamPlaces')
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
-            
-            return $userAuthenticator->authenticateUser(
-                $user,
-                $authenticator,
-                $request
-            );
-        }
 
+            $title = ['Продолжить регистрацию.'];
+
+            return $this->render('registration/afterRegister.html.twig', $title);
+
+            // После заполнения формы регистрации следующий код позволит юзеру сразу же зайти на сайт
+            // без подтверждения email:
+            // return $userAuthenticator->authenticateUser(
+            //     $user,
+            //     $authenticator,
+            //     $request
+            // );
+        }
+        
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
         ]);
     }
 
+
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request): Response
+    public function verifyUserEmail(Request $request, UserAuthenticator $authenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
@@ -86,4 +93,5 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('home');
     }
+
 }
