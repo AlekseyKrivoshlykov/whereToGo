@@ -8,7 +8,7 @@ class BaseController extends AbstractController {
 
     public function renderDefault () {
         return [
-            'title' => 'Kam_Places'
+            'title' => 'Добро пожаловать на сайт Kamplaces!'
         ];
     }
 }

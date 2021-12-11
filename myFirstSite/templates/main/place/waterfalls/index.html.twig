@@ -1,5 +1,5 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}Вулканы Камчатки{% endblock %}
+{% block title %}Водопады Камчатки{% endblock %}
 {% block body %}
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
@@ -13,14 +13,14 @@
 	{# <ul class="list-group"> #}
 	<div class="container-fluid">
 		<div class="row no-gutters mt-5">
-			{% for volcano in volcanoes %}
+			{% for waterfall in waterfalls %}
 				{# <li class="list-group-item"> #}
 				<div class="col place-card-wrapper">
 					<div class="card border-dark mb-3">
-						<a href="{{ path('volcanoes_id', {'id': volcano.getId }) }}" class="link place_link">
-							<img src="{{ asset('assets/main/images/Volcanoes/')}}{{ volcano.getMainPhoto }}" class="card-img-top" alt="volcano">
+						<a href="{{ path('waterfalls_id', {'id': waterfall.getId }) }}" class="link place_link">
+							<img src="{{ asset('assets/main/images/Waterfalls/')}}{{ waterfall.getMainPhoto }}" class="card-img-top" alt="waterfall">
 							<div class="card-body text-dark">
-								<h5 class="card-title">{{ volcano.title}}</h5>
+								<h5 class="card-title">{{ waterfall.title}}</h5>
 							</div>
 						</a>
 					</div>

@@ -1,10 +1,9 @@
 {% extends 'main/base.html.twig' %}
-
 {% block body %}
-	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5">{{ place.title }}</h1>
+	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5 title-page title-page">{{ place.title }}</h1>
 	{% if images | length > 0 %}
 		<div class="row no-gutters justify-content-center">
-			<div class="col-12 col-lg-8 col-md-12">
+			<div class="col-12 col-lg-8 col-md-12 mb-4">
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
@@ -31,22 +30,28 @@
 		</div>
 	{% endif %}
 
-	<div class="row justify-content-center text-align-center mt-5 mb-5">
+	{# <div class="col mt-5 mb-5 ml-5">
 		{{ place.description }}
-	</div>
+	</div> #}
 
+	{% if place.getLatitude and place.getLongitude is not null %}
 	<div class="row no-gutters justify-content-center mb-5">
 		<div class="col-12 col-lg-8 col-md-12">
 			<div id="map"></div>
 		</div>
 	</div>
+	{% endif %}
 
-	<h5 class="">
+	<h5 class="title-comment-section">
 		Отзывы посетителей
 	</h5>
 	<div class="comment-wrapper">
-
 		<div class="col commentaries">
+			{% if comments is empty %}
+			<div class="comment-item mb-3">
+				Да, отзывов пока нет.
+			</div>
+			{% endif %}
 			{% for comment in comments %}
 				<div class="comment-item mb-3">
 					<div class="comment-user-name mb-2">
@@ -56,17 +61,30 @@
 					<div class="comment-content">{{ comment.content }}
 					</div>
 				</div>
+				<hr>
 			{% endfor %}
 			<div class="comment-pagination mb-3">
-			{% if previous >= 0 %}
-				<a href="{{ path('hot_springs_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow"><i class="fas fa-chevron-left"></i></a>
-			{% endif %}
-			{% if next < comments|length %}
-				<a href="{{ path('hot_springs_id', { id: place.id, offset: next }) }}"><i class="fas fa-chevron-right"></i></a>
-			{% endif %}
+				{% if previous >= 0 %}
+					<a href="{{ path('hot_springs_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow">
+					
+						<i class="fas fa-chevron-left"></i>
+					</a>
+				{% endif %}
+				{% if next < comments|length %}
+					<a href="{{ path('hot_springs_id', { id: place.id, offset: next }) }}">
+						<i class="fas fa-chevron-right"></i>
+					</a>
+				{% endif %}
 			</div>
 		</div>
+
 		<div class="col comment-form">
+			{% for message in app.flashes('danger') %}
+				<div class="alert alert-danger alert-dismissible fade show" role="alert">
+					{{ message }}
+					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+				</div>
+			{% endfor %}
 			{{ form_start(form) }}
 			{{ form_row(form.user_name) }}
 			{{ form_row(form.content) }}
@@ -103,6 +121,7 @@ myMap.geoObjects.add(myGeoObject);
 
 }
 		</script>
+		<script src="{{ asset('assets/main/js/saveScrollScript.js')}}"></script>
 	{% endblock %}
 
 {% endblock %}

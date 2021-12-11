@@ -11,34 +11,36 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class VolcanoController extends BaseController
+class WaterfallsController extends BaseController
 {
-    #[Route('/volcanoes', name: 'volcanoes')]
-    public function indexVolcanoes (): Response
+    #[Route('/waterfalls', name: 'waterfalls')]
+    public function indexWaterfalls (): Response
     {
         $forRender = parent::renderDefault();
-        $forRender['title'] = 'Вулканы Камчатки';
-        $forRender['volcanoes'] = $this->getDoctrine()->getRepository(Place::class)
-                                        ->findBy(['category_place' => '1']);
+        $forRender['title'] = 'Водопады Камчатки';
+        $forRender['waterfalls'] = $this->getDoctrine()->getRepository(Place::class)
+                                        ->findBy(['category_place' => '3']);
         
-        return $this->render('main/place/volcanoes/index.html.twig', $forRender);
+        
+        return $this->render('main/place/waterfalls/index.html.twig', $forRender);
     }
 
-    #[Route('/volcanoes/{id}', name: 'volcanoes_id')]
-    public function showOneVolcano (int $id, Request $request, CommentRepository $commentRepository, Place $place): Response
+    #[Route('/waterfalls/{id}', name: 'waterfalls_id')]
+    public function showOneHotSpring (int $id, Request $request, CommentRepository $commentRepository, Place $place): Response
     {
         $place = $this->getDoctrine()->getRepository(Place::class)
-                                    ->find($id);
+                                     ->find($id);
         if (!$place) {
             throw $this->createNotFoundException('Место с'. $id . 'не найдено.');
         }
-        $images = $this->getDoctrine()->getRepository(Image::class)
-        ->findBy(['place' => $id]);
 
+        $images = $this->getDoctrine()->getRepository(Image::class)
+                                      ->findBy(['place' => $id]);
+       
         $forRender = parent::renderDefault();
         $forRender['place'] = $place;
         $forRender['images'] = $images;
-
+        
         $offset = max(0, $request->query->getInt('offset', 0));
         $paginator = $commentRepository->getCommentPaginator($place, $offset);
         $forRender['comments'] = $paginator;
@@ -63,13 +65,11 @@ class VolcanoController extends BaseController
         $em->persist($newComment);
         $em->flush();
 
-        return $this->redirectToRoute('volcanoes_id', ['id' => $id]);
+        return $this->redirectToRoute('waterfalls_id', ['id' => $id]);
         }
         }
     
         $forRender['form'] = $form->createView();
-    
-        return $this->render('main/place/volcanoes/oneVolcano.html.twig', $forRender);
+        return $this->render('main/place/waterfalls/oneWaterfall.html.twig', $forRender);    
     }
-   
 }
