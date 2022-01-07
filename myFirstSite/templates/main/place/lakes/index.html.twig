@@ -1,5 +1,5 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}Вулканы Камчатки{% endblock %}
+{% block title %}Озёра Камчатки{% endblock %}
 {% block body %}
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
@@ -13,14 +13,14 @@
 	{# <ul class="list-group"> #}
 	<div class="container-fluid">
 		<div class="row no-gutters mt-5">
-			{% for volcano in volcanoes %}
+			{% for lake in lakes %}
 				{# <li class="list-group-item"> #}
 				<div class="col place-card-wrapper">
 					<div class="card border-dark mb-3">
-						<a href="{{ path('volcanoes_id', {'id': volcano.getId }) }}" class="link place_link">
-							<img src="{{ asset('assets/main/images/Volcanoes/')}}{{ volcano.getMainPhoto }}" class="card-img-top" alt="volcano">
+						<a href="{{ path('lakes_id', {'id': lake.getId }) }}" class="link place_link">
+							<img src="{{ asset('assets/main/images/Lakes/')}}{{ lake.getMainPhoto }}" class="card-img-top" alt="lake">
 							<div class="card-body text-dark">
-								<h4 class="card-title">{{ volcano.title}}</h4>
+								<h4 class="card-title">{{ lake.title}}</h4>
 							</div>
 						</a>
 					</div>

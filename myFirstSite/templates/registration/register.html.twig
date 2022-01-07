@@ -9,11 +9,11 @@
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center">
 			<div class="col col-lg-6 col-md-8">
-			<div class="form-login shadow-lg">
+			<div class="form-login-register shadow-lg">
 				{% for flashError in app.flashes('verify_email_error') %}
 					<div class="alert alert-danger" role="alert">{{ flashError }}</div>
 				{% endfor %}
-				<h1 class="h3 mb-3 font-weight-normal">Регистрация</h1>
+				<h3 class="mb-3 font-weight-normal title-form-login-register">Регистрация</h3>
 
 				{{ form_start(registrationForm) }}
 				{{ form_row(registrationForm.email, {
@@ -23,7 +23,7 @@
             		label: 'Пароль:'
         		}) }}
 				{{ form_row(registrationForm.agreeTerms) }}
-				<button type="submit" class="btn btn-primary">Регистрация</button>
+				<button type="submit" class="btn btn-success btn-login-register">Регистрация</button>
 				{{ form_end(registrationForm) }}
 				</div>
 			</div>

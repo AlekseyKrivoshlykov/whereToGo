@@ -1,6 +1,6 @@
 {% extends 'main/base.html.twig' %}
 
-{% block title %}Горячие источники Камчатки{% endblock %}
+{% block title %}Места для отдыха на Камчатке{% endblock %}
 {% block body %}
 	<div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
@@ -11,7 +11,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
+	{# <div class="container-fluid">
 		<div class="row no-gutters justify-content-center mt-5">
 			<div class="col-12 col-lg-6 col-md-6 content-text">
 				<h2>Горячие источники Камчатки&nbsp;&mdash; это прекрасные места для отдыха. Только представьте: горячая ванна
@@ -19,18 +19,18 @@
 				</h2>
 			</div>
 		</div>
-	</div>
+	</div> #}
 	{# <ul class="list-group"> #}
 	<div class="container-fluid">
 		<div class="row no-gutters mt-5">
-			{% for spring in hotSprings %}
+			{% for another_place in another_places %}
 				{# <li class="list-group-item"> #}
 				<div class="col place-card-wrapper">
 					<div class="card border-dark mb-3">
-						<a href="{{ path('hot_springs_id', {'id': spring.getId }) }}" class="link place_link">
-							<img src="{{ asset('assets/main/images/HotSprings/')}}{{ spring.getMainPhoto }}" class="card-img-top" alt="hotspring">
+						<a href="{{ path('hot_springs_id', {'id': another_place.getId }) }}" class="link place_link">
+							<img src="{{ asset('assets/main/images/HotSprings/')}}{{ another_place.getMainPhoto }}" class="card-img-top" alt="another_place">
 							<div class="card-body text-dark">
-								<h4 class="card-title">{{ spring.title}}</h4>
+								<h4 class="card-title">{{ another_place.title}}</h4>
 							</div>
 						</a>
 					</div>
