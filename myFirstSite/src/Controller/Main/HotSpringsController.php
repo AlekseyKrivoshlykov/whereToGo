@@ -47,33 +47,29 @@ class HotSpringsController extends BaseController
         $forRender['previous'] = $offset - CommentRepository::PAGINATOR_PER_PAGE;
         $forRender['next'] = min(count($paginator), $offset + CommentRepository::PAGINATOR_PER_PAGE);
 
-        // if (!$this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-        //     $this->addFlash(
-        //        'success',
-        //        'Только зарегистрированные пользователи могут оставлять комментарии.'
-        //     );
-        // } else {
         $newComment = new Comment();
-        $newComment->setUser($this->getUser());
-        $place->addComment($newComment);
-        $newComment->setIsPublished();
         $form = $this->createForm(CommentType::class, $newComment);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($newComment);
-            $em->flush();
+        /** @var ClickableInterface $button  */
+        $button = $form->get('submit');
+            if($button->isClicked() && !$this->get('security.authorization_checker')
+                                        ->isGranted('IS_AUTHENTICATED_FULLY')) {   
+            $this->addFlash('danger', 'Только авторизованные посетители могут оставлять комментарии.');
+        } else {
+        $newComment->setUser($this->getUser());
+        $place->addComment($newComment);
+        $newComment->setIsPublished();
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($newComment);
+        $em->flush();
 
-            return $this->redirectToRoute('hot_springs_id', ['id' => $id]);
+        return $this->redirectToRoute('hot_springs_id', ['id' => $id]);
+        }
         }
     
         $forRender['form'] = $form->createView();
-        return $this->render('main/place/hotSprings/oneHotSpring.html.twig', $forRender);
-
-        // }
-        
-        
+        return $this->render('main/place/hotSprings/oneHotSpring.html.twig', $forRender);    
     }
-   
 }

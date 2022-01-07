@@ -5,13 +5,11 @@
 		<title>
 			{% block title %}{% endblock %}
 		</title>
-		{# Run `composer require symfony/webpack-encore-bundle`
-																								           and uncomment the following Encore helpers to start using Symfony UX #}
+		{# Run `composer require symfony/webpack-encore-bundle` and uncomment the following Encore helpers to start using Symfony UX #}
 		{% block stylesheets %}
 			<link rel="stylesheet" href="{{ asset('assets/library/fontawesome-5.15.4/css/all.min.css')}}">
 			<link rel="stylesheet" href="{{ asset('assets/library/bootstrap-5.1.3/css/bootstrap.min.css')}}">
 			<link rel="stylesheet" href="{{ asset('assets/main/css/style.css')}}">
-		{# <script src="https://kit.fontawesome.com/6d880d91ac.js" crossorigin="anonymous"></script> #}
 		{% endblock %}
 
 		{% block javascripts %}
@@ -21,15 +19,22 @@
 			<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 			<script src="{{ asset('assets/library/bootstrap-5.1.3/js/bootstrap.min.js')}}"></script>
 			<script src="https://api-maps.yandex.ru/2.1/?apikey=88974ba4-00aa-48cd-bf0f-e1694884b754&lang=ru_RU" type="text/javascript"></script>
-
 		{% endblock %}
 	</head>
 
 	<body>
+		<ul class="body_slides">
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	<div class="wrapper">
 		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{ path('home')}}">
-					<i class="fas fa-wine-bottle"></i>
+					
 				</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 					<span class="navbar-toggler-icon"></span>
@@ -37,7 +42,7 @@
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">KamPlaces</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Kamplaces</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="{{ path('volcanoes')}}">Вулканы</a>
@@ -46,13 +51,13 @@
 							<a class="nav-link active" aria-current="page" href="{{ path('hot_springs')}}">Горячие источники</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Озера</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('waterfalls')}}">Водопады</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Долина гейзеров</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Водопады</a>
+							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Озера</a>
 						</li>
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="{{ path('home')}}">Другие места</a>
@@ -60,22 +65,22 @@
 
 						{# ВЫПАДАЮЩЕЕ МЕНЮ ЕСЛИ НУЖНО ! #}
 						{# <li class="nav-item dropdown">
-																							<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-																							Dropdown
-																							</a>
-																							<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-																							<li>
-																							<a class="dropdown-item" href="#">Action</a>
-																							</li>
-																							<li>
-																							<a class="dropdown-item" href="#">Another action</a>
-																							</li>
-																							<li><hr class="dropdown-divider"></li>
-																							<li>
-																							<a class="dropdown-item" href="#">Something else here</a>
-																							</li>
-																							</ul>
-																							</li> #}
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						Dropdown
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+						<li>
+						<a class="dropdown-item" href="#">Action</a>
+						</li>
+						<li>
+						<a class="dropdown-item" href="#">Another action</a>
+						</li>
+						<li><hr class="dropdown-divider"></li>
+						<li>
+						<a class="dropdown-item" href="#">Something else here</a>
+						</li>
+						</ul>
+						</li> #}
 					</ul>
 
 					<div class="navbar-form-wrapper d-flex">
@@ -100,14 +105,16 @@
 			</div>
 		</nav>
 		
-		<main class="container"> {% block body %}{% endblock %}
-
-			
+		<main class="container-fluid"> {% block body %}{% endblock %}
 		</main>
 
-
 		<footer>
-			&copy; KamPlaces
+			&copy; Kamplaces
 		</footer>
+	</div>
+
+		
+		
+		
 	</body>
 </html>
