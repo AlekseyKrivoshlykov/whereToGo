@@ -63,7 +63,7 @@ class AnotherPlacesController extends BaseController
         $em->persist($newComment);
         $em->flush();
 
-        return $this->redirectToRoute('volcanoes_id', ['id' => $id]);
+        return $this->redirectToRoute('another_places_id', ['id' => $id]);
         }
         }
     

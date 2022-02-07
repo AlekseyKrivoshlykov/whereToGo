@@ -59,6 +59,11 @@ class Place
      */
     private $comments;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $how_to_get;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -199,6 +204,18 @@ class Place
                 $comment->setPlace(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getHowToGet(): ?string
+    {
+        return $this->how_to_get;
+    }
+
+    public function setHowToGet(?string $how_to_get): self
+    {
+        $this->how_to_get = $how_to_get;
 
         return $this;
     }
