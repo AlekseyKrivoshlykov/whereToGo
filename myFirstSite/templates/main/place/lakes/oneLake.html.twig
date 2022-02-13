@@ -7,12 +7,12 @@
 				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
 					<div class="carousel-inner">
 						<div class="carousel-item active">
-							<img src="{{ asset('assets/main/images/Waterfalls/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" class="d-block" alt="volcano">
+							<img src="{{ asset('assets/main/images/Lakes/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" class="d-block" alt="lake">
 						</div>
 						{% for img in images %}
 							{% if img.getSrc not in images[0].getSrc %}
 								<div class="carousel-item">
-									<img src="{{ asset('assets/main/images/Waterfalls/'~ place.getId ~ '') }}/{{ img.getSrc }}" class="d-block" alt="volcano">
+									<img src="{{ asset('assets/main/images/Lakes/'~ place.getId ~ '') }}/{{ img.getSrc }}" class="d-block" alt="lake">
 								</div>
 							{% endif %}
 						{% endfor %}
@@ -64,13 +64,13 @@
 			{% endfor %}
 			<div class="comment-pagination mb-3">
 				{% if previous >= 0 %}
-					<a href="{{ path('waterfalls_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow">
+					<a href="{{ path('lakes_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow">
 					
 						<i class="fas fa-chevron-left"></i>
 					</a>
 				{% endif %}
 				{% if next < comments|length %}
-					<a href="{{ path('waterfalls_id', { id: place.id, offset: next }) }}">
+					<a href="{{ path('lakes_id', { id: place.id, offset: next }) }}">
 						<i class="fas fa-chevron-right"></i>
 					</a>
 				{% endif %}
