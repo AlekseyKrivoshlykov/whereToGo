@@ -66,7 +66,7 @@ class AdminUserController extends AdminBaseController
     public function updateAction (Request $request, int $userId) 
     {
       $user = $this->userRepository->getOne($userId);
-      $formUser = $this->createForm(UserType:: class, $user);
+      $formUser = $this->createForm(UserType::class, $user);
       $formUser->handleRequest($request);
       if($formUser->isSubmitted() && $formUser->isValid())
       {

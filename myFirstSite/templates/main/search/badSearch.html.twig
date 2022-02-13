@@ -19,15 +19,6 @@
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			{% endfor %}
-			{% for place in places %}
-				{% for category in nameCategory %}
-					<div class="col-12 col-lg-6 col-md-6 content-text mb-2">
-						<h4>
-							<a href="{{ path('' ~ category.en_title ~ '_id', { 'id': place.id }) }}" class="link-search-result">{{ place.title }}</a>
-						</h4>
-					</div>
-				{% endfor %}
-			{% endfor %}
 		</div>
 	</div>
 {% endblock %}

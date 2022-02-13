@@ -9,6 +9,7 @@
          url('/fonts/Arimo-Regular.ttf') format('ttf'),
          url('/fonts/Arimo-Regular.eot') format('eot'),
 }
+
 @font-face {
     font-family: 'Arimo';
     font-style: normal;
@@ -20,20 +21,24 @@
          url('/fonts/Arimo-Bold.ttf') format('ttf'),
          url('/fonts/Arimo-Bold.eot') format('eot'),
 }
+
 html,
 body {
     height: 100%;
     font-family: 'Arimo', sans-serif;
     overflow-x: hidden;
 }
+
 img {
     vertical-align: unset;
 }
+
 .wrapper {
     min-height: 100%;
     display: flex;
     flex-direction: column;
 }
+
 .main {
     flex: 1 1 auto;
 }
@@ -114,6 +119,7 @@ img {
     text-shadow: 0px 2px 3px black;
     color: white;
 }
+
 .form-login-register {
     display: flex;
     flex-direction: column;
@@ -126,69 +132,78 @@ img {
     text-shadow: 0px 2px 3px black;
     color: white;
 }
+
 .btn-login-register {
     display: block;
     margin: 1rem auto 0;
 }
+
 .title-form-login-register {
     margin: 0 auto;
 }
+
 .form-group label {
     margin-bottom: 0.3rem;
 }
+
 .search_form {
     margin-right: 2rem;
 }
+
 .nav_btn_entry {
     margin-right: 1rem;
 }
+
 .carousel-item {
     /* width: 767px; */
     height: 383px;
 }
 
 .carousel-item img {
-    /* width: 767px;
-    height: 383px;
-    max-width: 100%;
-    max-height: 100%; */
-
     object-fit: cover;
     /* width: 960px;
     height: 480px !important; */
     width: 100%;
     height: 100%;
 }
+
 .nav-link:hover {
     box-shadow: 0 0 0 0.15rem rgb(248 249 250 / 50%);
 }
+
 .form-group {
     margin-bottom: 0.5rem;
 }
+
 #map {
     max-width: 960px;
     height: 383px;
     /* max-width: 100%; */
     max-height: 100%;
 }
+
 .comment-wrapper {
     display: flex;
     justify-content: space-between;
     padding: 0 2rem;
 }
+
 .title-comment-section {
     margin-left: 2rem;
     font-weight: 700;
     text-shadow: 0px 2px 3px black;
     color: white;
 }
+
 .commentaries {
     flex: 0 0 50%;
     margin-right: 1rem;
 }
+
 .comment-form {
     flex: 0 0 50%;
 }
+
 .comment-item {
     font-weight: 700;
     text-shadow: 0px 2px 3px black;
@@ -196,24 +211,30 @@ img {
     background-color: rgba(0, 0, 0, 0.4);
     padding: 1rem 1rem;
 }
+
 .comment-pagination {
     display: flex;
     justify-content: center;
 }
+
 .pagination-left-arrow {
     margin-right: 3rem;
 }
+
 #comment_user_name {
     width: 60%;
 }
+
 #comment_content {
     height: 6rem;
 }
+
 .content-text {
     font-weight: 700;
     text-shadow: 0px 2px 3px black;
     color: white;
 }
+
 .title-page {
     font-weight: 700;
     text-shadow: 0px 2px 3px black;
@@ -221,35 +242,45 @@ img {
     margin: 0 auto;
     text-align: center;
 }
+
 .fa-chevron-right {
     color: white;
 }
+
 .fa-chevron-left {
     color: white;
 }
+
 .carousel-control-next {
     opacity: 1;
 }
+
 .carousel-control-prev {
     opacity: 1;
 }
+
 .link-search-result {
     color: inherit;
     text-decoration: none;
 }
+
 .link-search-result:hover {
     color: rgba(255, 255, 255, 0.8)
 }
+
 .search-result-row {
     flex-direction: column;
 }
+
 .description-wrap {
     padding: 0 7rem;
     font-size: 1.5rem;
 }
+
 .description-title {
     text-align: center;
 }
+
 .place-cards-wrapper {
     display: flex;
     flex-direction: row;
@@ -259,6 +290,7 @@ img {
     grid-gap: 1rem;
     grid-template-columns: repeat(2, 1fr); */
 }
+
 .place-card-wrapper {
     flex: 0 0 48%;
     margin-right: 1rem;
@@ -267,14 +299,17 @@ img {
     border-radius: 0;
     background-color: rgba(0, 0, 0, 0.1);
 }
+
 .place-card-wrapper:hover {
     transform: translateY(-1px);
     background-color: rgba(0, 0, 0, 0.5); 
 }
+
 .img-wrap {
     flex: 0 0 50%;
     height: 15rem;
 }
+
 .card-body {
     flex: 0 0 50%;
     text-align: center;
@@ -284,11 +319,13 @@ img {
     padding: 0;
     margin-left: 5px;
 }
+
 .card-img-top {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
+
 .place_link {
     display: flex;
     flex-direction: row;
@@ -300,6 +337,28 @@ img {
     grid-gap: 1rem;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: 1fr; */
+}
+
+.alert-message {
+    color: #fff;
+    background-color: #dc3545;
+    padding: 0.375rem 0.75rem;
+    text-align: center;
+    border-radius: 0.25rem;
+}
+
+.invalid-feedback {
+    color: #fff;
+    background-color: #dc3545;
+    padding: 0.375rem 0.75rem;
+    text-align: center;
+    border-radius: 0.25rem;
+}
+
+.text-uppercase {
+    text-transform: none;
+    font-size: inherit;
+    padding: 0;
 }
 
 @media (max-width: 1200px)
