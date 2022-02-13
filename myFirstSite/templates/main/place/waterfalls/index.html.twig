@@ -12,22 +12,22 @@
 	</div>
 	{# <ul class="list-group"> #}
 	<div class="container-fluid">
-		<div class="row no-gutters mt-5">
+		<div class="place-cards-wrapper no-gutters mt-5">
 			{% for waterfall in waterfalls %}
 				{# <li class="list-group-item"> #}
-				<div class="col place-card-wrapper">
-					<div class="card border-dark mb-3">
-						<a href="{{ path('waterfalls_id', {'id': waterfall.getId }) }}" class="link place_link">
-							<img src="{{ asset('assets/main/images/Waterfalls/')}}{{ waterfall.getMainPhoto }}" class="card-img-top" alt="waterfall">
+				<div class="place-card-wrapper border-dark mb-3">
+					<a href="{{ path('waterfalls_id', {'id': waterfall.getId }) }}" class="link place_link">
+							<div class="img-wrap">
+								<img src="{{ asset('assets/main/images/Waterfalls/')}}{{ waterfall.getMainPhoto }}" class="card-img-top" alt="waterfall">
+							</div>
 							<div class="card-body text-dark">
 								<h4 class="card-title">{{ waterfall.title}}</h4>
 							</div>
-						</a>
-					</div>
+					</a>
 				</div>
-				{# </li> #}
-			{% endfor %}
+						{# </li> #}
+					{% endfor %}
+					{# </ul> #}
 		</div>
-		{# </ul> #}
 	</div>
 {% endblock %}
