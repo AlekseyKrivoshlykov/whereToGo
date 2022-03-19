@@ -4,6 +4,7 @@ namespace App\Controller\Registration;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Repository\UserRepository;
 use App\Security\EmailVerifier;
 use App\Security\UserAuthenticator;
 use Doctrine\ORM\EntityManagerInterface;
@@ -75,13 +76,20 @@ class RegistrationController extends AbstractController
 
 
     #[Route('/verify/email', name: 'app_verify_email')]
-    public function verifyUserEmail(Request $request, UserAuthenticator $authenticator, UserAuthenticatorInterface $userAuthenticator): Response
+    public function verifyUserEmail(Request $request, UserRepository $userRepository, UserAuthenticator $authenticator, UserAuthenticatorInterface $userAuthenticator): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $userRepository->find($request->query->get('id'));
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
 
+        // Строка ниже позволяет работать методу только при полной авторизации юзера.
+        // $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        
         // validate email confirmation link, sets User::isVerified=true and persists
         try {
-            $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            // $this->emailVerifier->handleEmailConfirmation($request, $this->getUser());
+            $this->emailVerifier->handleEmailConfirmation($request, $user);
         } catch (VerifyEmailExceptionInterface $exception) {
             $this->addFlash('verify_email_error', $exception->getReason());
 
@@ -89,9 +97,10 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Your email address has been verified.');
+        $this->addFlash('success', 'Ваш email подтвержден, Вы можете зайти на сайт.');
 
-        return $this->redirectToRoute('home');
+        return $this->redirectToRoute('app_login');
+        // return $this->redirectToRoute('home');
     }
 
 }

@@ -4,10 +4,13 @@
 {% endblock %}
 
 {% block body %}
-
-	<div class="container-fluid">
-		<div class="row no-gutters justify-content-center">
-			<div class="col col-lg-6 col-md-8">
+			<div class="container-form">
+			{% for message in app.flashes('success') %}
+                   <div class="alert alert-success alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+                {% endfor %}
 				<div class="form-login-register shadow-lg">
 					<h3 class="mb-3 font-weight-normal title-form-login-register">Вход в систему</h3>
 					<form method="post">
@@ -34,24 +37,21 @@
 							<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
 						</div>
 						{#
-																        Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-																        See https://symfony.com/doc/current/security/remember_me.html
+						Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+						See https://symfony.com/doc/current/security/remember_me.html
 																
-																        <div class="checkbox mb-3">
-																            <label>
-																                <input type="checkbox" name="_remember_me"> Remember me
-																            </label>
-																        </div>
-																    #}
+						<div class="checkbox mb-3">
+							<label>
+						  	<input type="checkbox" name="_remember_me"> Remember me
+							</label>
+						</div>
+						#}
 
 						<button class="btn btn-success btn-login-register" type="submit">
 							Войти
 						</button>
 					</form>
-
 				</div>
 			</div>
-		</div>
-	</div>
 
 {% endblock %}

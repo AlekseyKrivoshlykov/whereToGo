@@ -34,8 +34,8 @@
 			<li></li>
 		</ul>
 	<div class="wrapper">
-		<header class="header">	
-		<nav class="navbar navbar-expand-xl navbar-dark bg-dark">
+		<header class="header bg-dark">	
+		<nav class="navbar navbar-expand-xl navbar-dark">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="{{ path('home')}}">
 					
@@ -109,13 +109,19 @@
 			</div>
 		</nav>
 		</header>
-		
-		<main class="container-fluid main"> {% block body %}{% endblock %}
+
+		<main class="main">
+			<div class="container-main">
+				{% block body %}{% endblock %}
+			</div>
 		</main>
 
-		<footer class="footer">
-			&copy; Kamplaces
+		<footer>
+			<div class="container-footer">
+				&copy; Kamplaces
+			</div>
 		</footer>
+		
 	</div>
 
 		

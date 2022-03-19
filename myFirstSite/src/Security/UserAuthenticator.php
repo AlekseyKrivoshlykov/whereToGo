@@ -32,8 +32,7 @@ class UserAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): PassportInterface
     {
         $email = $request->request->get('email', '');
-        // dd$(email);
-        // $isVerified = $this->getDoctrine()->getRepository(User::class)->find($email);
+        
         $request->getSession()->set(Security::LAST_USERNAME, $email);
 
         return new Passport(
