@@ -24,7 +24,7 @@ class PlaceRepository extends ServiceEntityRepository implements PlaceRepository
 
     }
 
-        public function findQuery (string $value): array
+    public function findQuery (string $value): array
     {
         $result = $this->createQueryBuilder('place')
             ->select('place.title', 'place.id', '(place.category_place)')

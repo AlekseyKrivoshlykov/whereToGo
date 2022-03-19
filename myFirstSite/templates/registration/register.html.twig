@@ -15,11 +15,14 @@
 				{{ form_row(registrationForm.email, {
 					label: 'Email:'
 				}) }}
-				{{ form_row(registrationForm.plainPassword, {
+				{{ form_row(registrationForm.plainPassword.first, {
             		label: 'Пароль:'
         		}) }}
+				{{ form_row(registrationForm.plainPassword.second, {
+            		label: 'Повтор пароля:'
+        		}) }}
 				{{ form_row(registrationForm.agreeTerms) }}
-				<button type="submit" class="btn btn-success btn-login-register">Регистрация</button>
+				<button type="submit" class="btn btn-success btn-login-register">Продолжить</button>
 				{{ form_end(registrationForm) }}
 				</div>
 			</div>

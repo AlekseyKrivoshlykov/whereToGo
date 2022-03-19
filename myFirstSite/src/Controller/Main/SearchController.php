@@ -26,21 +26,25 @@ class SearchController extends BaseController
     #[Route('/search', name: 'search')]
     public function searchIndex (Request $request): Response
     {
-        $forRender = parent::renderDefault();
-        $forRender['title'] = 'Результаты поиска';
         $query = $request->query->get('q');
         $searchResult = $this->placeRepository->findQuery($query);
-        $forRender['places'] = $searchResult;
-        $categoryPlaceId = [];
-        $nameCategory = [];
-        foreach($searchResult as $value) {
-            $categoryPlaceId = $value['1'];
-            $nameCategory = $this->categoryRepository->findCategory($categoryPlaceId);
-            
-        }
+        $forRender['title'] = 'Результаты поиска';
+   
+        if(empty($query) or empty($searchResult)) {
+            $this->addFlash('danger', 'Место не найдено');
+            return $this->render('main/search/badSearch.html.twig', $forRender);
+        } else {
+            $forRender = parent::renderDefault();
+            $forRender['places'] = $searchResult;
+            $categoryPlaceId = [];
+            $nameCategory = [];
+            foreach($searchResult as $value) {
+                $categoryPlaceId = $value['1'];
+                $nameCategory = $this->categoryRepository->findCategory($categoryPlaceId);
+            }
      
-        $forRender['nameCategory'] = $nameCategory;  
-        return $this->render('main/search/index.html.twig', $forRender);
-        
+            $forRender['nameCategory'] = $nameCategory;  
+            return $this->render('main/search/index.html.twig', $forRender);
+        }  
     }
 }
