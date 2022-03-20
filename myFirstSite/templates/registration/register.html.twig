@@ -2,9 +2,8 @@
 {% block title %}Регистрация{% endblock %}
 {% block body %}
 	{# <div>{{ message }}</div> #}
-	<div class="container-fluid">
-		<div class="row no-gutters justify-content-center">
-			<div class="col col-lg-6 col-md-8">
+
+		<div class="container-form">
 			<div class="form-login-register shadow-lg">
 				{% for flashError in app.flashes('verify_email_error') %}
 					<div class="alert alert-danger" role="alert">{{ flashError }}</div>
@@ -24,8 +23,7 @@
 				{{ form_row(registrationForm.agreeTerms) }}
 				<button type="submit" class="btn btn-success btn-login-register">Продолжить</button>
 				{{ form_end(registrationForm) }}
-				</div>
 			</div>
 		</div>
-	</div>
+		
 {% endblock %}
