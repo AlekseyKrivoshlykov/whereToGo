@@ -390,6 +390,23 @@ footer {
     padding: 0 !important;
 }
 
+.reset-link {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 700;
+    text-shadow: 0px 2px 3px black;
+    color: white;
+    margin-top: 1rem;
+}
+
+.check-mail-link {
+        text-decoration: underline;
+        cursor: pointer;
+        color: white;
+}
+
 @media (max-width: 1200px)
 {
     .form-login-register {

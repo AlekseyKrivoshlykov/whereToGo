@@ -1,0 +1,25 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Сбросить Ваш пароль
+{% endblock %}
+
+{% block body %}
+	<div class="container-form">
+		{% for flashError in app.flashes('reset_password_error') %}
+			<div class="alert alert-danger" role="alert">{{ flashError }}</div>
+		{% endfor %}
+		<div class="form-login-register shadow-lg">
+			<h3 class="mb-3 font-weight-normal title-form-login-register">Сбросить пароль</h3>
+
+			{{ form_start(requestForm) }}
+            <div style="text-align:center;">
+				Введите Ваш email и мы вышлем вам ссылку для сброса пароля.
+			</div>
+			{{ form_row(requestForm.email, {
+					label: 'Email:'
+				}) }}
+			<button class="btn btn-success btn-login-register">Сбросить пароль</button>
+			{{ form_end(requestForm) }}
+		</div>
+	</div>
+{% endblock %}
