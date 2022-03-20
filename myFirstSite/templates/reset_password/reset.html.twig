@@ -1,0 +1,22 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Изменить пароль
+{% endblock %}
+
+{% block body %}
+	<div class="container-form">
+		<div class="form-login-register shadow-lg">
+			<h3 class="mb-3 font-weight-normal title-form-login-register">Изменить пароль</h3>
+			{{ form_start(resetForm) }}
+            {{ form_row(resetForm.plainPassword.first, {
+            		label: 'Новый пароль:'
+        	}) }}
+			{{ form_row(resetForm.plainPassword.second, {
+            		label: 'Повтор пароля:'
+        	}) }}
+			{# {{ form_row(resetForm.plainPassword) }} #}
+			<button class="btn btn-success btn-login-register">Изменить пароль</button>
+			{{ form_end(resetForm) }}
+		</div>
+	</div>
+{% endblock %}

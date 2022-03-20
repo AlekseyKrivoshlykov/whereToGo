@@ -1,0 +1,22 @@
+{% extends 'main/base.html.twig' %}
+
+{% block title %}Проверьте Вашу почту
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid">
+		<div class="row no-gutters justify-content-center mt-5">
+			<div class="h5 col-12 col-lg-6 col-md-10 content-text">
+				<div class="form-login-register shadow-lg">
+					<p>
+						Если учётная запись, соответствующая Вашему адресу электронной почты, существует, значит, только что было отправлено электронное письмо, содержащее ссылку, которую Вы можете использовать для сброса пароля.
+											        Срок действия этой ссылки истекает через
+						{{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+					</p>
+					<p>Если вы не получили письмо, проверьте папку со спамом или
+						<a href="{{ path('app_forgot_password_request') }}" class="check-mail-link">попробуйте снова</a>.</p>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
