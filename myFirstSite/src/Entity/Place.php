@@ -64,6 +64,11 @@ class Place
      */
     private $how_to_get;
 
+    /**
+     * @ORM\Column(type="string", length=500, nullable=true)
+     */
+    private $content_source;
+
     public function __construct()
     {
         $this->images = new ArrayCollection();
@@ -216,6 +221,18 @@ class Place
     public function setHowToGet(?string $how_to_get): self
     {
         $this->how_to_get = $how_to_get;
+
+        return $this;
+    }
+
+    public function getContentSource(): ?string
+    {
+        return $this->content_source;
+    }
+
+    public function setContentSource(?string $content_source): self
+    {
+        $this->content_source = $content_source;
 
         return $this;
     }
