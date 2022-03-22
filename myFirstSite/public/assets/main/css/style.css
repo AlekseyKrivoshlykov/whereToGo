@@ -39,7 +39,7 @@ img {
     flex-direction: column;
 }
 
-.container-main {
+.main-container {
     max-width: 1440px;
     margin: 0 auto;
 }
@@ -48,11 +48,12 @@ img {
     flex: 1 1 auto;
 }
 
-.container-footer {
+.footer-container {
     max-width: 1920px;
     margin-left: auto;
     margin-right: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     color: white;
@@ -390,21 +391,27 @@ footer {
     padding: 0 !important;
 }
 
-.reset-link {
-    display: block;
-    text-align: center;
+.link-name {
     text-decoration: none;
     cursor: pointer;
     font-weight: 700;
     text-shadow: 0px 2px 3px black;
     color: white;
+}
+
+.link-name:hover {
+    color: #406487;
+}
+
+.link-wrapper {
+    text-align: center;
     margin-top: 1rem;
 }
 
 .check-mail-link {
-        text-decoration: underline;
-        cursor: pointer;
-        color: white;
+    text-decoration: underline;
+    cursor: pointer;
+    color: white;
 }
 
 .content-source {

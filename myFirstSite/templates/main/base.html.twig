@@ -111,14 +111,17 @@
 		</header>
 
 		<main class="main">
-			<div class="container-main">
+			<div class="main-container">
 				{% block body %}{% endblock %}
 			</div>
 		</main>
 
 		<footer>
-			<div class="container-footer">
-				&copy; Kamplaces
+			<div class="footer-container">
+				<div class="footer-links"> 
+					<a href="{{ path('user_agreement') }}" target="_blank" class="link-name">Пользовательское соглашение</a>
+				</div>
+				<div> &copy; Kamplaces </div>
 			</div>
 		</footer>
 		
