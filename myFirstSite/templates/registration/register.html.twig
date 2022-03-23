@@ -20,7 +20,21 @@
 				{{ form_row(registrationForm.plainPassword.second, {
             		label: 'Повтор пароля:'
         		}) }}
+				
 				{{ form_row(registrationForm.agreeTerms) }}
+				{# {{ form_label(registrationForm.agreeTerms, 'opachke') }} #}
+				
+				 
+			
+				{# <div class="form-group">
+					<div class="form-check">        
+						<input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
+        				<a href="{{ path('user_agreement') }}">
+							<label class="form-check-label required" for="registration_form_agreeTerms">Соглашение с правилами сайта</label>
+						</a>
+					</div>
+				</div> #}
+
 				<button type="submit" class="btn btn-success btn-login-register">Продолжить</button>
 				{{ form_end(registrationForm) }}
 			</div>

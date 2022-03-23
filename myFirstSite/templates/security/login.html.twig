@@ -12,7 +12,7 @@
 					</div>
                 {% endfor %}
 				<div class="form-login-register shadow-lg">
-					<h3 class="mb-3 font-weight-normal title-form-login-register">Вход в систему</h3>
+					<h3 class="mb-3 font-weight-normal title-form-login-register">Вход на сайт</h3>
 					<form method="post">
 						{% if error %}
 							{# {{ dump(error) }} #}
@@ -23,7 +23,7 @@
 							<div class="mb-3 content-text">
 								Вы уже вошли в систему, как
 								{{ app.user.username }},
-								<a href="{{ path('app_logout') }}">Выйти из системы</a>
+								<a href="{{ path('app_logout') }}">Выйти из платформы</a>
 							</div>
 						{% endif %}
 						<div class="form-group">
@@ -50,7 +50,9 @@
 						<button class="btn btn-success btn-login-register" type="submit">
 							Войти
 						</button>
-						<a href="{{ path('app_forgot_password_request') }}" class="reset-link">Забыли пароль?</a>
+						<div class="link-wrapper">
+							<a href="{{ path('app_forgot_password_request') }}" class="link-name">Забыли пароль?</a>
+						</div>
 					</form>
 				</div>
 			</div>
