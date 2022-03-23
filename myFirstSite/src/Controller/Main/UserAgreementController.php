@@ -12,7 +12,7 @@ class UserAgreementController extends BaseController {
     public function index () {
 
         $forRender = parent::renderDefault();
-        return $this->render('security/userAgreement.html.twig', $forRender);
+        return $this->render('documents/userAgreement.html.twig', $forRender);
     }
 
 }
