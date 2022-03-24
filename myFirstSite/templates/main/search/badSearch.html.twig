@@ -1,8 +1,8 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}KamPlaces
+{% block title %}Поиск | Kamplaces - Природные места Камчатки для отдыха
 {% endblock %}
 {% block body %}
-	<div class="container-fluid">
+	<div class="container-fluid mb-4">
 		<div class="row no-gutters justify-content-center mt-5">
 			<div class="col-12 col-lg-6 col-md-6">
 				<h1 class="text-center title-page">
@@ -11,14 +11,14 @@
 			</div>
 		</div>
 	</div>
-	<div class="container-fluid">
-		<div class="row no-gutters justify-content-center mt-5 search-result-row">
+	<div class="container-fluid" style="max-width: 450px; text-align: center">
+		
 			{% for message in app.flashes('danger') %}
 				<div class="alert alert-danger alert-dismissible fade show" role="alert">
 					{{ message }}
 					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 				</div>
 			{% endfor %}
-		</div>
+		
 	</div>
 {% endblock %}

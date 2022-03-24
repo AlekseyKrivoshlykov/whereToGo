@@ -1,5 +1,5 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}Регистрация
+{% block title %}Регистрация | Kamplaces - Природные места Камчатки для отдыха
 {% endblock %}
 {% block body %}
 	{# <div>{{ message }}</div> #}
@@ -20,17 +20,11 @@
 			{{ form_row(registrationForm.plainPassword.second, {
             		label: 'Повтор пароля:'
         		}) }}
-			<div class="form-group">
-				<div class="form-check">
-					<input type="checkbox" id="registration_form_agreeTerms" name="registration_form[agreeTerms]" required="required" class="form-check-input" value="1">
-					<label class="form-check-label required" for="registration_form_agreeTerms">
-						<a href="{{ path('user_agreement') }}" target="_blank" class="link-name">Соглашение с правилами сайта</a>
-					</label>
-				</div>
+			<div style="display: flex;"> 
+				{{ form_row(registrationForm.agreeTerms) }}
+				<a href="{{ path('user_agreement') }}" target="_blank" class="link-name">Соглашение с правилами сайта</a>
 			</div>
 			<button type="submit" class="btn btn-success btn-login-register">Продолжить</button>
-
-			<div style="display:none;">{{ form_row(registrationForm.agreeTerms) }}</div>
 			{{ form_end(registrationForm) }}
 		</div>
 	</div>

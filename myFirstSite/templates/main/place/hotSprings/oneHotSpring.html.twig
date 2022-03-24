@@ -1,30 +1,33 @@
 {% extends 'main/base.html.twig' %}
+{% block title %}{{ place.title }} | Kamplaces - Природные места Камчатки для отдыха{% endblock %}
 {% block body %}
 	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5 title-page">{{ place.title }}</h1>
 	{% if images | length > 0 %}
-		<div class="row no-gutters justify-content-center mb-5">
-			<div class="col-12 col-lg-8 col-md-12">
-				<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-					<div class="carousel-inner">
-						<div class="carousel-item active">
-							<a href="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" target="_blank"><img src="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" class="d-block" alt="hotspring"></a>
+		<div class="container-fluid">
+			<div class="row no-gutters justify-content-center mb-5">
+				<div class="col-12 col-lg-8 col-md-12">
+					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+						<div class="carousel-inner">
+							<div class="carousel-item active">
+								<a href="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" target="_blank"><img src="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ images[0].getSrc }}" class="d-block" alt="hotspring"></a>
+							</div>
+							{% for img in images %}
+								{% if img.getSrc not in images[0].getSrc %}
+									<div class="carousel-item">
+										<a href="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ img.getSrc }}" target="_blank"><img src="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ img.getSrc }}" class="d-block" alt="hotspring"></a>
+									</div>
+								{% endif %}
+							{% endfor %}
 						</div>
-						{% for img in images %}
-							{% if img.getSrc not in images[0].getSrc %}
-								<div class="carousel-item">
-									<a href="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ img.getSrc }}" target="_blank"><img src="{{ asset('assets/main/images/HotSprings/'~ place.getId ~ '') }}/{{ img.getSrc }}" class="d-block" alt="hotspring"></a>
-								</div>
-							{% endif %}
-						{% endfor %}
+						<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Previous</span>
+						</button>
+						<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="visually-hidden">Next</span>
+						</button>
 					</div>
-					<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-						<span class="carousel-control-prev-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Previous</span>
-					</button>
-					<button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-						<span class="carousel-control-next-icon" aria-hidden="true"></span>
-						<span class="visually-hidden">Next</span>
-					</button>
 				</div>
 			</div>
 		</div>
@@ -32,15 +35,16 @@
 
 	{% if place.getContentSource is not null %}
 		<div class="row justify-content-center title-page content-source">
-			Источник контента: {{ place.getContentSource }}
+			Источник контента:
+			{{ place.getContentSource }}
 		</div>
 	{% endif %}
 
 	{% if place.getHowToGet is not null %}
 		<div class="row no-gutters justify-content-center mb-5 description-wrap">
 			<div class="col content-text">
-				<h2 class="description-title mb-3"> 
-					Как добраться? 
+				<h2 class="description-title mb-3">
+					Как добраться?
 				</h2>
 				{{ place.getHowToGet }}
 			</div>
@@ -48,65 +52,67 @@
 	{% endif %}
 
 	{% if place.getLatitude and place.getLongitude is not null %}
-		<div class="row no-gutters justify-content-center mb-5">
-			<div class="col-12 col-lg-8 col-md-12">
-				<div id="map"></div>
+		<div class="container-fluid">
+			<div class="row no-gutters justify-content-center mb-5">
+				<div class="col-12 col-lg-8 col-md-12">
+					<div id="map"></div>
+				</div>
 			</div>
 		</div>
 	{% endif %}
 
 	<section class="comment-block">
-	<div class="comment-wrapper">
-		<div class="commentaries">
-		<h3 class="title-comment-section">
-			Отзывы посетителей
-		</h3>
-			{% if comments is empty %}
-				<div class="comment-item mb-3">
-					Да, отзывов пока нет.
-				</div>
-			{% endif %}
-			{% for comment in comments %}
-				<div class="comment-item mb-3">
-					<div class="comment-user-name mb-2">
-						{{ comment.getUserName }}
-						{{ comment.getCreateAt | date('d.m.y H:i')}}
+		<div class="comment-wrapper">
+			<div class="commentaries">
+				<h3 class="title-comment-section">
+					Отзывы посетителей
+				</h3>
+				{% if comments is empty %}
+					<div class="comment-item mb-3">
+						Да, отзывов пока нет.
 					</div>
-					<div class="comment-content">{{ comment.content }}
+				{% endif %}
+				{% for comment in comments %}
+					<div class="comment-item mb-3">
+						<div class="comment-user-name mb-2">
+							{{ comment.getUserName }}
+							{{ comment.getCreateAt | date('d.m.y H:i')}}
+						</div>
+						<div class="comment-content">{{ comment.content }}
+						</div>
 					</div>
-				</div>
-			{% endfor %}
-			<div class="comment-pagination mb-3">
-				{% if previous >= 0 %}
-					<a href="{{ path('hot_springs_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow">
+				{% endfor %}
+				<div class="comment-pagination mb-3">
+					{% if previous >= 0 %}
+						<a href="{{ path('hot_springs_id', { id: place.id, offset: previous }) }}" class="pagination-left-arrow">
 
-						<i class="fas fa-chevron-left"></i>
-					</a>
-				{% endif %}
-				{% if next < comments|length %}
-					<a href="{{ path('hot_springs_id', { id: place.id, offset: next }) }}">
-						<i class="fas fa-chevron-right"></i>
-					</a>
-				{% endif %}
+							<i class="fas fa-chevron-left"></i>
+						</a>
+					{% endif %}
+					{% if next < comments|length %}
+						<a href="{{ path('hot_springs_id', { id: place.id, offset: next }) }}">
+							<i class="fas fa-chevron-right"></i>
+						</a>
+					{% endif %}
+				</div>
+			</div>
+
+			<div class="comment-form">
+				<h3 class="title-comment-section">
+					Оставить комментарий
+				</h3>
+				{% for message in app.flashes('danger') %}
+					<div class="alert alert-danger alert-dismissible fade show" role="alert">
+						{{ message }}
+						<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+					</div>
+				{% endfor %}
+				{{ form_start(form) }}
+				{{ form_row(form.user_name) }}
+				{{ form_row(form.content) }}
+				{{ form_end(form) }}
 			</div>
 		</div>
-
-		<div class="comment-form">
-		<h3 class="title-comment-section">
-			Оставить комментарий
-		</h3>
-			{% for message in app.flashes('danger') %}
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					{{ message }}
-					<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-				</div>
-			{% endfor %}
-			{{ form_start(form) }}
-			{{ form_row(form.user_name) }}
-			{{ form_row(form.content) }}
-			{{ form_end(form) }}
-		</div>
-	</div>
 	</section>
 
 	{% block javascript %}
