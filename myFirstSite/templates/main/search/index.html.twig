@@ -1,5 +1,5 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}KamPlaces
+{% block title %}Поиск | Kamplaces - Природные места Камчатки для отдыха
 {% endblock %}
 {% block body %}
 	<div class="container-fluid">
@@ -12,7 +12,7 @@
 		</div>
 	</div>
 	<div class="container-fluid">
-		<div class="row no-gutters justify-content-center mt-5 search-result-row">
+		<div class="row no-gutters align-items-center mt-5 search-result-row">
 			{% for message in app.flashes('danger') %}
 				<div class="alert alert-danger alert-dismissible fade show" role="alert">
 					{{ message }}
@@ -23,7 +23,7 @@
 				{% for category in nameCategory %}
 					<div class="col-12 col-lg-6 col-md-6 content-text mb-2">
 						<h4>
-							<a href="{{ path('' ~ category.en_title ~ '_id', { 'id': place.id }) }}" class="link-search-result">{{ place.title }}</a>
+							<a href="{{ path('' ~ category.en_title ~ '_id', { 'id': place.id }) }}" class="link-name">{{ place.title }}</a>
 						</h4>
 					</div>
 				{% endfor %}
