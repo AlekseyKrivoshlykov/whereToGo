@@ -1,0 +1,24 @@
+{% extends 'main/base.html.twig' %}
+{% block body %}
+{# {{ form_start(form) }}
+    {{ form_widget(form) }}
+    <input type="hidden" name="url" value="{{ app.request.headers.get('referer') }}">
+{{ form_end(form) }} #}
+
+<div class="container-form form-login-register">
+	<h3 class="">
+		Редактировать комментарий
+	</h3>
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger alert-dismissible fade show" role="alert">
+			{{ message }}
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+		</div>
+	{% endfor %}
+	{{ form_start(form) }}
+	{{ form_row(form.user_name) }}
+	{{ form_row(form.content) }}
+	<input type="hidden" name="url" value="{{ app.request.headers.get('referer') }}">
+	{{ form_end(form) }}
+</div>
+{% endblock %}
