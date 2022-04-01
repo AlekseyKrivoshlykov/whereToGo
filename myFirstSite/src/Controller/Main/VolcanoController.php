@@ -33,7 +33,7 @@ class VolcanoController extends BaseController
             throw $this->createNotFoundException('Место с'. $id . 'не найдено.');
         }
         $images = $this->getDoctrine()->getRepository(Image::class)
-        ->findBy(['place' => $id]);
+                                    ->findBy(['place' => $id]);
 
         $forRender = parent::renderDefault();
         $forRender['place'] = $place;

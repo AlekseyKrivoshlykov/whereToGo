@@ -449,6 +449,36 @@ footer {
     color: #406487;
 }
 
+.comment-user-wrapper {
+    display: flex;
+    justify-content: space-between;
+}
+
+.comment-btn-panel {
+    display: flex;
+}
+
+.comment-btn-edit {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+    margin-right: 1rem;
+}
+
+.comment-btn-edit:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.comment-btn-delete {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.comment-btn-delete:hover {
+    color: black;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
 @media (max-width: 1200px)
 {
     .form-login-register {
