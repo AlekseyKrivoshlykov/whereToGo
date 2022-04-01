@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ValleyOfGeysersController extends BaseController
 {
-    #[Route('/valley_of_geysers', name: 'valley_of_geysers', methods: ['GET'])]
+    #[Route('/valley_of_geysers', name: 'valley_of_geysers')]
     public function indexValleyOfGeysers (Request $request, CommentRepository $commentRepository): Response
     {
         $forRender = parent::renderDefault();

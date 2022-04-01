@@ -82,7 +82,9 @@
 								{{ comment.getUserName }}
 								{{ comment.getCreateAt | date('d.m.y H:i')}}
 							</div>
-							{# {% if comment.getUser %} #}
+								
+							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							{% if app.user.id is same as (comment.getUser.getId) %}
 							<div class="comment-btn-panel">
 								<a href="{{ path('comment_edit', {'id': comment.getId }) }}" class="btn comment-btn-edit">
 									<i class="fas fa-pen"></i>
@@ -95,9 +97,9 @@
 									</button>
 								</form>
 							</div>
-							{# {% endif %} #}
+							{% endif %}
+							{% endif %}
 						</div>
-
 						<div class="comment-content">
 							{{ comment.content }}
 						</div>
@@ -136,7 +138,7 @@
 		</div>
 	</section>
 
-	{% block javascript %}
+{% block javascript %}
 		<script type="text/javascript">
 			ymaps.ready(init);
 function init() {
@@ -164,7 +166,10 @@ myMap.geoObjects.add(myGeoObject);
 
 }
 		</script>
-		<script src="{{ asset('assets/main/js/saveScrollScript.js')}}"></script>
+		
 	{% endblock %}
-
+	<script src="{{ asset('assets/main/js/saveScrollScript.js')}}"></script>
 {% endblock %}
+
+
+

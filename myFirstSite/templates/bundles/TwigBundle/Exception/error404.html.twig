@@ -1,0 +1,22 @@
+{% extends 'main/base.html.twig' %}
+{% block title %}
+	Страница не найдена - Ошибка 404 | Kamplaces - Природные места Камчатки для отдыха
+{% endblock %}
+
+{% block body %}
+	<div class="container-fluid mt-5">
+		<div class="row no-gutters justify-content-center" style="padding: 0 5px">
+				<div class="error-page-wrapper shadow-lg">
+					<p>
+						{{ status_code}} ошибка</p>
+					<p>
+						Запрошенная страница не найдена.
+						
+					</p>
+                    <p class="mb-3"> 
+                    <a href="{{ path('home') }}" class="btn btn-success">Вернуться на сайт</a>
+                    </p>
+			</div>
+		</div>
+	</div>
+{% endblock %}
