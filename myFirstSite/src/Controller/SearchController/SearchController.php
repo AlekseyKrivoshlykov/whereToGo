@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Controller\Main;
+namespace App\Controller\SearchController;
 
 use App\Entity\Place;
 use App\Entity\Image;
+use App\Controller\Main\BaseController;
 use App\Repository\CategoryPlaceRepository;
 use App\Repository\CategoryPlaceRepositoryInterface;
 use App\Repository\PlaceRepository;
@@ -32,7 +33,7 @@ class SearchController extends BaseController
    
         if(empty($query) or empty($searchResult)) {
             $this->addFlash('danger', 'Место не найдено');
-            return $this->render('main/search/badSearch.html.twig', $forRender);
+            return $this->render('search/badSearch.html.twig', $forRender);
         } else {
             $forRender = parent::renderDefault();
             $forRender['places'] = $searchResult;
@@ -44,7 +45,7 @@ class SearchController extends BaseController
             }
      
             $forRender['nameCategory'] = $nameCategory;  
-            return $this->render('main/search/index.html.twig', $forRender);
+            return $this->render('search/index.html.twig', $forRender);
         }  
     }
 }

@@ -96,13 +96,33 @@
 						Да, отзывов пока нет.
 					</div>
 				{% endif %}
-				{% for comment in comments %}
+					{% for comment in comments %}
 					<div class="comment-item mb-3">
-						<div class="comment-user-name mb-2">
-							{{ comment.getUserName }}
-							{{ comment.getCreateAt | date('d.m.y H:i')}}
+						<div class="comment-user-wrapper mb-2">
+							<div class="comment-user-data">
+								{{ comment.getUserName }}
+								{{ comment.getCreateAt | date('d.m.y H:i')}}
+							</div>
+								
+							{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							{% if app.user.id is same as (comment.getUser.getId) %}
+							<div class="comment-btn-panel">
+								<a href="{{ path('comment_edit', {'id': comment.getId }) }}" class="btn comment-btn-edit">
+									<i class="fas fa-pen"></i>
+								</a>
+
+								<form method="post" action="{{ path('comment_delete', {'id': comment.id}) }}" onsubmit="return confirm('Вы действительно хотите удалить комментарий?');">
+									<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ comment.id) }}">
+									<button class="btn comment-btn-delete">
+										<i class="fas fa-trash"></i>
+									</button>
+								</form>
+							</div>
+							{% endif %}
+							{% endif %}
 						</div>
-						<div class="comment-content">{{ comment.content }}
+						<div class="comment-content">
+							{{ comment.content }}
 						</div>
 					</div>
 				{% endfor %}

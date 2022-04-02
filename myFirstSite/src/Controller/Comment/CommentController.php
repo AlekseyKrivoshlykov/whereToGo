@@ -7,11 +7,14 @@ use App\Form\Comment1Type;
 use App\Form\CommentType;
 use App\Repository\CommentRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+
+use function PHPUnit\Framework\throwException;
 
 #[Route('/comment')]
 class CommentController extends AbstractController
@@ -55,20 +58,31 @@ class CommentController extends AbstractController
     #[Route('/{id}/edit', name: 'comment_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, Comment $comment, EntityManagerInterface $entityManager): Response
     {
+        // dd($request);
+
         $form = $this->createForm(CommentType::class, $comment);
         $form->handleRequest($request);
+
+        $previousUrl = $request->headers->get('referer');
+        $encodeUrl = base64_encode($previousUrl);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
-            $url = $request->request->get('url');
-            
-            return $this->redirect($url); 
+            $urlFromForm = $request->request->get('url');
+            $decodeUrl = base64_decode($urlFromForm);
+            $currentHost = parse_url($decodeUrl, PHP_URL_HOST);
+            if($currentHost == 'kamplaces') {
+                return $this->redirect($decodeUrl); 
+            } else {
+                throw new Exception();
+            }
         }
 
         return $this->renderForm('comment/_edit_form.html.twig', [
             'comment' => $comment,
             'form' => $form,
+            'encodeUrl' => $encodeUrl,
         ]);
     }
 
