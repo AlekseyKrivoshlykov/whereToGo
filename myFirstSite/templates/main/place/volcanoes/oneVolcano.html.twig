@@ -6,7 +6,7 @@
 {% block body %}
 	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5 title-page">{{ place.title }}</h1>
 	{% if images | length > 0 %}
-		<div class="container-fluid">
+		<div class="map-slider-container">
 			<div class="row no-gutters justify-content-center mb-5">
 				<div class="col-12 col-lg-8 col-md-12">
 					<div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
@@ -55,7 +55,7 @@
 	{% endif %}
 
 	{% if place.getLatitude and place.getLongitude is not null %}
-		<div class="container-fluid">
+		<div class="map-slider-container">
 			<div class="row no-gutters justify-content-center mb-5">
 				<div class="col-12 col-lg-8 col-md-12">
 					<div id="map"></div>
@@ -137,39 +137,42 @@
 			</div>
 		</div>
 	</section>
+{% endblock %}
 
 {% block javascript %}
-		<script type="text/javascript">
-			ymaps.ready(init);
-function init() {
-var myMap = new ymaps.Map("map", {
-center: [
-{{ place.getLatitude }}, {{ place.getLongitude }}
-],
-zoom: 9
-});
+	<script type="text/javascript">
+		ymaps.ready(init);
+		function init() {
+			var myMap = new ymaps.Map("map", {
+			center: [
+				{{ place.getLatitude }}, {{ place.getLongitude }}
+			],
+			zoom: 9
+			});
 
-var myGeoObject = new ymaps.GeoObject({
-geometry: {
-type: "Point",
-coordinates: [{{ place.getLatitude }}, {{ place.getLongitude }}]
-},
-properties: {
-hintContent: [
-'Широта: ' + {{ place.getLatitude }},
-' долгота: ' + {{ place.getLongitude }}
-]
-}
-});
+		var myGeoObject = new ymaps.GeoObject({
+			geometry: {
+				type: "Point",
+				coordinates: [{{ place.getLatitude }}, {{ place.getLongitude }}]
+			},
+			properties: {
+				hintContent: [
+					'Широта: ' + {{ place.getLatitude }},
+					' долгота: ' + {{ place.getLongitude }}
+				]
+			}
+		});
 
-myMap.geoObjects.add(myGeoObject);
+		myMap.geoObjects.add(myGeoObject);
 
-}
-		</script>
-		
-	{% endblock %}
-	<script src="{{ asset('assets/main/js/saveScrollScript.js')}}"></script>
+		}
+	</script>
+		<script src="{{ asset('assets/main/js/saveScrollScript.js')}}"></script>
 {% endblock %}
+
+
+
+
 
 
 
