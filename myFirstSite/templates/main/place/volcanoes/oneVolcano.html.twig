@@ -1,8 +1,10 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}
-	{{ place.title }}
-	| Kamplaces - Природные места Камчатки для отдыха
+{% block title %} {{ place.title }} | Kamplaces - Природные места Камчатки для отдыха {% endblock %}
+
+{% block head %} 
+<meta name="description" content="{{ place.title }} на Kamplaces."/>
 {% endblock %}
+
 {% block body %}
 	<h1 class="h3 row justify-content-center text-align-center mt-5 mb-5 title-page">{{ place.title }}</h1>
 	{% if images | length > 0 %}
@@ -36,13 +38,6 @@
 		</div>
 	{% endif %}
 
-	{% if place.getContentSource is not null %}
-		<div class="row justify-content-center title-page content-source">
-			Источник контента:
-			{{ place.getContentSource }}
-		</div>
-	{% endif %}
-
 	{% if place.getHowToGet is not null %}
 		<div class="row no-gutters justify-content-center mb-5 description-wrap">
 			<div class="col content-text">
@@ -61,6 +56,13 @@
 					<div id="map"></div>
 				</div>
 			</div>
+		</div>
+	{% endif %}
+
+	{% if place.getContentSource is not null %}
+		<div class="row justify-content-center title-page content-source">
+			Источник фото:
+			{{ place.getContentSource }}
 		</div>
 	{% endif %}
 

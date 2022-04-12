@@ -1,10 +1,14 @@
 {% extends 'main/base.html.twig' %}
-{% block title %}Долина Гейзеров | Kamplaces - Природные места Камчатки для отдыха
+{% block title %} Долина Гейзеров | Kamplaces - Природные места Камчатки для отдыха {% endblock %}
+
+{% block head %} 
+<meta name="description" content="Долина Гейзеров. Куда отправиться в путешествие, где отдохнуть, на что посмотреть на Камчатке."/>
 {% endblock %}
+
 {% block body %}
-	<div class="container-fluid">
+	<div class="container-fluid mb-5">
 		<div class="row no-gutters justify-content-center mt-5">
-			<div class="col-12 col-lg-6 col-md-6 mb-3">
+			<div class="col-12 col-lg-6 col-md-6">
 				<h1 class="text-center title-page">
 					{{ title }}
 				</h1>
@@ -41,28 +45,23 @@
 			</div>
 		</div>
 	{% endif %}
-	<div class="row no-gutters justify-content-center mb-5 description-wrap">
-		<div class="content-text">
-			<h2 class="description-title mb-3">Краткое описание</h2>
-			{{ place.description }}
-		</div>
-		<div class="content-text mt-5">
-			<h2 class="description-title mb-3">Туризм</h2>
-			Как в советское время, так и после 1991 года Долина гейзеров была одним из самых посещаемых туристами мест Камчатки. Также Долина гейзеров является частью объекта Всемирного наследия ЮНЕСКО «Вулканы Камчатки».
+	<div class="container-fluid">
+		<div class="row no-gutters justify-content-center mb-5 description-wrap">
+			<div class="content-text">
+				<h2 class="description-title mb-3">Краткое описание</h2>
+				{{ place.description }}
+			</div>
+			<div class="content-text mt-5">
+				<h2 class="description-title mb-3">Туризм</h2>
+					Как в советское время, так и после 1991 года Долина гейзеров была одним из самых посещаемых туристами мест Камчатки. Также Долина гейзеров является частью объекта Всемирного наследия ЮНЕСКО «Вулканы Камчатки».
 						С 1967 года в Долине гейзеров запрещён «дикий» туризм, а с 1977 года — туризм вообще.
 						В 1993 году после создания необходимой инфраструктуры долину снова открыли для посещения туристов. В год в долину приезжало более трёх тысяч человек.
 						Самостоятельный доступ туристов в Долину гейзеров строго ограничен.
 						Стенка «Витраж» в Долине гейзеров на почтовой марке России 2002 года (ЦФА [АО «Марка»] № 758)
 						В 2007 году глава Федерального агентства по туризму Владимир Стржалковский просил президента России Владимира Путина об увеличении квоты на посещение объекта туристами, на что получил ответ: «Это решение должно быть основано исключительно на мнении экспертов», который пресса трактовала как отказ.
+			</div>
 		</div>
 	</div>
-
-	{% if place.getContentSource is not null %}
-		<div class="row justify-content-center title-page content-source">
-			Источник контента:
-			{{ place.getContentSource }}
-		</div>
-	{% endif %}
 
 	{% if place.getHowToGet is not null %}
 		<div class="row no-gutters justify-content-center mb-5 description-wrap">
@@ -82,6 +81,13 @@
 					<div id="map"></div>
 				</div>
 			</div>
+		</div>
+	{% endif %}
+
+	{% if place.getContentSource is not null %}
+		<div class="row justify-content-center title-page content-source">
+			Источник фото:
+			{{ place.getContentSource }}
 		</div>
 	{% endif %}
 

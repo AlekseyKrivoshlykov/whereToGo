@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow: /search?q=
+Disallow: /admin
+Sitemap: https://kamplaces.ru/Sitemap.txt
