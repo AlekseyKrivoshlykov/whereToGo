@@ -7,3 +7,4 @@
 19Add - методы edit/delete для комментария. Нет исключений и проверок - сделать/
 20Add - кастомный вывод ошибок; апргрейд метода edit в CommentController; добавлены кнопки edit&delete Comment/
 21Add - Prod 02.04.2022/
+22Add - Prod 12.04.2022 - решены проблемы webmastera Yandex/
