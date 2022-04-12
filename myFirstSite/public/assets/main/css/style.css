@@ -24,7 +24,7 @@
 
 html,
 body {
-    height: 100%;
+    /* min-height: 100vh; */
     font-family: 'Arimo', sans-serif;
     overflow-x: hidden;
 }
@@ -34,7 +34,7 @@ img {
 }
 
 .wrapper {
-    min-height: 100%;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
@@ -45,7 +45,8 @@ img {
 }
 
 .main {
-    flex: 1 1 auto;
+    /* flex: 1 1 auto; */
+    flex-grow: 1;
 }
 
 .footer-container {
@@ -62,6 +63,7 @@ img {
 }
 
 footer {
+    flex-shrink: 0;
     background-color: #1d2c3b;
     margin-top: 2rem;
     padding: 1rem;
@@ -504,11 +506,16 @@ footer {
     font-style: italic;
 }
 
+.map-slider-container {
+    padding: 0 12px;
+}
+
 @media (max-width: 1200px)
 {
     .form-login-register {
         width: 100%;
     }
+
 }
 @media (max-width: 1199px)
 {
@@ -516,28 +523,34 @@ footer {
         margin-bottom: 1rem;
         margin-left: 3.125rem;
     }
+
     .navbar-form-wrapper {
         flex-direction: column;
         align-items: inherit;
         margin-bottom: 0.8rem;
     }
+
     .navbar-nav {
         align-items: inherit;
     }
+
     .navbar-toggler-icon {
         width: 2em;
         height: 3em;
     }  
+
 }
 @media (max-width: 1150px)
 {
     .place-card-wrapper {
         flex: 0 0 100%;
     }
+
     .img-wrap {
         /* flex: 0 0 38%; */
         height: 18rem;
     }
+
 }
 @media (max-width: 767px)
 {
@@ -545,9 +558,11 @@ footer {
         /* flex: 0 0 45%; */
         height: 16rem;
     }
+
     .description-wrap {
         padding: 0;
     }
+
     .comment-wrapper {
         flex-direction: column-reverse;
     }
@@ -563,6 +578,7 @@ footer {
     .carousel-item, #map {
         height: 330px;
     }  
+
 }
 @media (max-width: 610px)
 {
@@ -570,29 +586,39 @@ footer {
         /* flex: 0 0 50%; */
         height: 12rem;
     }
+
 }
 @media (max-width: 500px)
 {
     .carousel-item, #map {
         height: 245px;
     }
+
     .comment-wrapper {
         padding: 0 12px;
     }
+
 }
 @media (max-width: 425px)
 {
    .place_link {
        flex-direction: column;
    }
+
    .card-body {
        margin-top: 1rem;
    }
+
    .img-wrap {
        height: 15rem;
    }
+
    .carousel-item, #map {
     height: 230px;
+   }
+
+   .map-slider-container {
+       padding: 0;
    }
 }
 
